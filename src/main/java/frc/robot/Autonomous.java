@@ -6,7 +6,7 @@ class Autonomous extends Robot {
     int tick; // tick counter
 
     /**
-     * A detect whether an autonomous code sequence can run based on a tick interval 
+     * A detect whether an autonomous code sequence can run based on a tick interval
      */
     class PeriodicSequence {
         public int startTick; // which tick to start running
