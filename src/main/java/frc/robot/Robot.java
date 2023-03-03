@@ -7,12 +7,7 @@
 
 package frc.robot;
 
-//import com.ctre.phoenix.motorcontrol.InvertType;
-
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
-//import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 /**
@@ -25,7 +20,9 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
 
     public static Motor leftMotors, rightMotors, leftBackMotor, rightBackMotor, intakeMotor, climbMotor;
-
+    
+    // defines the voltage output for the motor controllers
+    // based on a 12V system
     static double driveSlowSpeed = 0.3;
     static double driveMediumSpeed = 0.5;
     static double driveFastSpeed = 0.8;
@@ -33,13 +30,11 @@ public class Robot extends TimedRobot {
     static double intakeNormalSpeed = 0.5;
     static double intakeShootSpeed = 1;
 
-    static double climbSpeed = 0.5;
+    static double climbSpeed = 1;
 
     public static ControlStick leftStick, rightStick;
     public static Limelight limelight = new Limelight();
     public static Controller driveController, otherController;
-
-    Compressor comp;
 
     int count = 0;
 
@@ -55,16 +50,6 @@ public class Robot extends TimedRobot {
         leftMotors.setSpeed(left);
         rightMotors.setSpeed(-right);
     }
-
-    /*public static void shootBall() {
-        /*if (!limelight.targetVisible())
-            return;
-
-        setDriveMotors(0, 0);
-        intakeMotor.setSpeed(intakeNormalSpeed);
-        Timer.delay(2);
-        intakeMotor.setSpeed(intakeShootSpeed);
-    }*/
 
     /**
      * This function is run when the robot is first started up and should be used

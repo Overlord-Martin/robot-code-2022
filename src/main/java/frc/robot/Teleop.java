@@ -28,15 +28,19 @@ public class Teleop extends Autonomous {
         double driveFastSpeed = Robot.driveFastSpeed * driveInverted;
         double driveMediumSpeed = Robot.driveMediumSpeed * driveInverted;
         double driveSlowSpeed = Robot.driveSlowSpeed * driveInverted;
+        double driveSpeed;
 
         if (driveController.getBumper("right")) {
-            setDriveMotors(driveController.getLeftY() * driveFastSpeed, driveController.getRightY() * driveFastSpeed);
+            driveSpeed = driveFastSpeed;
         } else if (driveController.getBumper("left")) {
-            setDriveMotors(driveController.getLeftY() * driveSlowSpeed, driveController.getRightY() * driveSlowSpeed);
+            driveSpeed = driveSlowSpeed;
         } else {
-            setDriveMotors(driveController.getLeftY() * driveMediumSpeed,
-                    driveController.getRightY() * driveMediumSpeed);
+            driveSpeed = driveMediumSpeed;
         }
+
+        setDriveMotors(
+            (driveInverted == 1 ? driveController.getLeftY() : driveController.getRightY()) * driveSpeed,
+            (driveInverted == 1 ? driveController.getRightY() : driveController.getLeftY()) * driveSpeed);
 
         // Hold a/b buttons to intake/shoot with intake motor
         // Hold right bumper to reverse
@@ -50,12 +54,12 @@ public class Teleop extends Autonomous {
             intakeMotor.setSpeed(0);
         }
 
-        // Hold left bumper + x button to rev climb motor
-        // Hold with rstick to invert motor
-        if (otherController.getBumper("left") && otherController.getButton("x") && otherController.getButton("rstick")) {
-            climbMotor.setSpeed(-climbSpeed);
-        } else if (otherController.getBumper("left") && otherController.getButton("x")) {
+        // Hold left bumper + x button to forward climb
+        // Hold left bumper + y button to reverse climb
+        if (otherController.getBumper("left") && otherController.getButton("x")) {
             climbMotor.setSpeed(climbSpeed);
+        } else if (otherController.getBumper("left") && otherController.getButton("y")) {
+            climbMotor.setSpeed(-climbSpeed);
         } else {
             climbMotor.setSpeed(0);
         }

@@ -23,8 +23,8 @@ class Autonomous extends Robot {
     }
 
     PeriodicSequence startSequence = new PeriodicSequence(0, sec); // start sequence
-    PeriodicSequence retreatSequence = new PeriodicSequence(sec * 3, sec * 3); // get out of there
-    PeriodicSequence endSequence = new PeriodicSequence(sec * 6, 1);
+    PeriodicSequence retreatSequence = new PeriodicSequence(sec * 3, sec * 5); // get out of there
+    PeriodicSequence endSequence = new PeriodicSequence(sec * 8, 1);
 
     /**
      * This function is called at the beginning of autonomous.
